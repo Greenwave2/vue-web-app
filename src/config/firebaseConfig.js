@@ -1,4 +1,4 @@
-export default firebaseConfig = {
+export default {
     apiKey: 'AIzaSyCvwHfqX0FHhsz9uqauU54SObeH8dyqk94',
     authDomain: 'xindian-f463a.firebaseapp.com',
     projectId: 'xindian-f463a',
