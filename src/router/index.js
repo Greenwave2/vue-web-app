@@ -8,17 +8,21 @@ const router = createRouter({
       component: () => import("../views/Home.vue"),
     },
     {
-      path: "/register",
-      component: () => import("../views/Register.vue"),
+      path: "/login",
+      component: () => import("../views/Login.vue"),
     },
-    {
-      path: "/sign-in",
-      component: () => import("../views/SignIn.vue"),
-    },
-    {
-      path: "/feed",
-      component: () => import("../views/Feed.vue"),
-    },
+    // {
+    //   path: "/register",
+    //   component: () => import("../views/Register.vue"),
+    // },
+    // {
+    //   path: "/sign-in",
+    //   component: () => import("../views/SignIn.vue"),
+    // },
+    // {
+    //   path: "/feed",
+    //   component: () => import("../views/Feed.vue"),
+    // },
   ],
 });
 
