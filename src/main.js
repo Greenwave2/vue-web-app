@@ -1,4 +1,29 @@
+// create app
 import { createApp } from 'vue'
 import App from './App.vue'
+const app = createApp(App)
 
-createApp(App).mount('#app')
+// element-plus
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+app.use(ElementPlus)
+
+// vue-router
+import router from './router'
+app.use(router)
+
+// vuex
+import store from './store'
+app.use(store)
+
+// i18n
+import i18n from './i18n'
+app.use(i18n)
+
+// Initialize Firebase
+import { initializeApp } from 'firebase/app'
+import firebaseConfig from './config/firebaseConfig.js'
+initializeApp(firebaseConfig)
+
+
+app.mount('#app')
