@@ -30,8 +30,8 @@ const form = reactive({
 })
 const error = ref('')
 
-const signIn = () => {
-    store.dispatch('signIn', {
+const signIn = async () => {
+    await store.dispatch('signIn', {
         email: form.email,
         password: form.password
     })
@@ -39,8 +39,8 @@ const signIn = () => {
     router.push('/system')
 }
 
-const signInWithGoogle = () => {
-    store.dispatch('signInWithGoogle')
+const signInWithGoogle = async () => {
+    await store.dispatch('signInWithGoogle')
 
     router.push('/system')
 }
