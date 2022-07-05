@@ -8,12 +8,19 @@ import {
     GoogleAuthProvider
 } from 'firebase/auth'
 
+import { ElMessage } from 'element-plus'
+
 const store = createStore({
     state () {
         return {
             user: null
         }
     },
+    getters: {
+        getUser(state) {
+            return state.user
+        }
+    }, 
     mutations: {
         SET_USER (state, user) {
             state.user = user
@@ -27,19 +34,37 @@ const store = createStore({
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password)
                 const user = userCredential.user
+                console.log("[signUp] user: ", user)
                 commit('SET_USER', user)
             } catch (error) {
-                console.error(error)
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        ElMessage.error('Email already in use')
+                    case 'auth/invalid-email':
+                        ElMessage.error('Invalid email')
+                    case 'auth/weak-password':
+                        ElMessage.error('Weak password')
+                    default:
+                        throw console.error(error.message)
+                }
             }
         }, 
         async signIn ({ commit }, { email, password }) {
             try {
                 const userCredential = await signInWithEmailAndPassword(auth, email, password)
                 const user = userCredential.user
+                console.log("[signIn] user: ", user)
                 commit('SET_USER', user)
             }
             catch (error) {
-                console.error(error)
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                        ElMessage.error('User not found')
+                    case 'auth/wrong-password':
+                        ElMessage.error('Wrong password')
+                    default:
+                        throw console.error(error.message)
+                }
             }
         }, 
         async signOut ({ commit }) {
@@ -48,7 +73,7 @@ const store = createStore({
                 commit('CLEAR_USER')
             }
             catch (error) {
-                console.error(error)
+                throw console.error(error.message)
             }
         },
         async signInWithGoogle ({ commit }) {
