@@ -20,10 +20,4 @@ app.use(store)
 import i18n from './i18n'
 app.use(i18n)
 
-// Initialize Firebase
-import { initializeApp } from 'firebase/app'
-import firebaseConfig from './config/firebaseConfig.js'
-initializeApp(firebaseConfig)
-
-
 app.mount('#app')
