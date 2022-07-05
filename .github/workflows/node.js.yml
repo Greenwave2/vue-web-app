@@ -30,9 +30,9 @@ jobs:
     
     # Test current directory and change dist to kaso-agri
     - name: Current directory
-    - run: ls -la
-    - name: change dist to kaso-agri
-    - run: mv ./dist ./kaso-agri
+      run: ls -la
+    - name: Change dist to kaso-agri
+      run: mv ./dist ./kaso-agri
     
     - name: Copy single file to remote
     - uses: garygrossgarten/github-action-scp@release
