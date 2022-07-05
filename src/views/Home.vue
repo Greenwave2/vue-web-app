@@ -7,7 +7,7 @@ const router = useRouter()
     <el-container>
         <el-header>
             <el-affix>
-                <el-button type="primary" @click="router.push('/login')"> Login </el-button>
+                <el-button type="primary" @click="router.push('/sign-in')"> Login </el-button>
             </el-affix>
         </el-header>
         <el-main>

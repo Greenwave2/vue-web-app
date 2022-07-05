@@ -38,12 +38,12 @@ router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth) && auth.currentUser == null) { // 判斷該路徑是否需要登入
     next({
       path: "/sign-in",
-      query: { redirect: to.fullPath }
+      // query: { redirect: to.fullPath }
     })
   } else if(to.matched.some(record => record.meta.requiresGuest) && auth.currentUser != null ) { // 判斷該路徑是否需要登出
     next({
       path: "/",
-      query: { redirect: to.fullPath }
+      // query: { redirect: to.fullPath }
     })
   } else {
     next();
