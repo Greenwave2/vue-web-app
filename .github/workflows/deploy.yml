@@ -40,6 +40,6 @@ jobs:
       with:
         local: ./kaso-agri
         remote: ~/xindian_test/webui
-        host: ${{ secrets.HOST }}
+        host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PASSWORD }}
