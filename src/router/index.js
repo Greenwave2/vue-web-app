@@ -27,6 +27,14 @@ const routes = [
     meta: {
       requiresAuth: true,
     }
+  },
+  {
+    path: "/test_axios_option",
+    component: () => import("../views/Test_axios_option.vue")
+  },
+  {
+    path: "/test_axios_composition",
+    component: () => import("../views/Test_axios_comp.vue")
   }
 ]
 
