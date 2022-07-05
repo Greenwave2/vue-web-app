@@ -5,7 +5,8 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+    onAuthStateChanged
 } from 'firebase/auth'
 
 import { ElMessage } from 'element-plus'
@@ -90,6 +91,9 @@ const store = createStore({
             catch (error) {
                 console.error(error)
             }
+        }, 
+        setUser ({ commit }, user) {
+            commit('SET_USER', user)
         }
     }
 })
