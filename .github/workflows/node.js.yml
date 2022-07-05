@@ -26,7 +26,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - run: vite build
+    - run: npm run build
 #    - run: npm test
     
     # Test current directory and change dist to kaso-agri
