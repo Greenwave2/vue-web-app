@@ -29,9 +29,9 @@ jobs:
 #    - run: npm test
     
     # Test current directory and change dist to kaso-agri
-    - name: Test current directory
+    - name: Current directory
     - run: ls -la
-    - run: pwd
+    - name: change dist to kaso-agri
     - run: mv ./dist ./kaso-agri
     
     - name: Copy single file to remote
