@@ -4,8 +4,7 @@
         active-text-color="#ffd04b"
         background-color="#545c64"
         text-color="#fff"
-        @open="handleSelect"
-        @close="handleSelect"
+        @select="handleSelect"
     >
         <el-menu-item index="logo">LOGO</el-menu-item>
         <el-menu-item index="dashboard">
@@ -30,14 +29,19 @@ import {
   Setting,
 } from '@element-plus/icons-vue'
 
-import { ref, watch } from 'vue'
+import { ref, watch, onBeforeMount } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
 const activeIndex = ref('')
+
+onBeforeMount(() => {
+    activeIndex.value = route.path.split('/')[2]
+})
+
 watch(() => route.path,() => {
-    console.log("路徑變化: ", route.path)
-    activeIndex.value = route.path.split('/')[1]
+    console.log("路徑變化: ", route.path.split('/')[2])
+    activeIndex.value = route.path.split('/')[2]
 })
 
 const router = useRouter()
