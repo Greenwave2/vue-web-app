@@ -1,9 +1,9 @@
-<script setup>
-</script>
-
 <template>
   <router-view></router-view>
 </template>
+
+<script setup>
+</script>
 
 <style>
 #app {
@@ -16,5 +16,6 @@
 
 html,body,#app{
   height: 100%;
+  margin: 0;
 }
 </style>

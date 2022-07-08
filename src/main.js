@@ -20,6 +20,12 @@ app.use(store)
 import i18n from './i18n'
 app.use(i18n)
 
+// axios
+import axios from 'axios'
+//app.config.globalProperties.$axios=axios
+//app.use(axios)
+app.provide('$axios', axios);
+
 // Initialize Firebase
 import { initializeApp } from 'firebase/app'
 import firebaseConfig from './config/firebaseConfig.js'
