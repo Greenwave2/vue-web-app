@@ -26,7 +26,16 @@ const routes = [
     component: () => import("../views/System.vue"),
     meta: {
       requiresAuth: true,
-    }
+    },
+    children: [
+      {
+        path: "/system/profile",
+        component: () => import("../layouts/Profile.vue")
+      },
+      {
+        path: "/system/dashboard"
+      },
+    ]
   },
   {
     path: "/test_axios_option",

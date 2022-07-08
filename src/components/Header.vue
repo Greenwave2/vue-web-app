@@ -6,31 +6,45 @@
     :ellipsis="false"
     @select="handleSelect"
   >
-    <el-menu-item index="0">LOGO</el-menu-item>
     <div class="flex-grow" />
-    <el-menu-item index="1">Processing Center</el-menu-item>
-    <el-sub-menu index="2">
-      <template #title>Workspace</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
+    <el-menu-item index="lang">Languages</el-menu-item>
+    <el-sub-menu index="user">
+      <template #title><el-icon><Avatar /></el-icon></template>
+      <el-menu-item index="profile">Profile</el-menu-item>
+      <el-menu-item index="signOut">Sign Out</el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>
 
-<script lang="ts" setup>
-import { ref } from 'vue'
+<script setup>
+import { Avatar } from '@element-plus/icons-vue'
 
-const activeIndex = ref('1')
-const handleSelect = (key: string, keyPath: string[]) => {
-  console.log(key, keyPath)
+import { ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
+const store = useStore()
+const router = useRouter()
+
+const signOut = () => {
+    store.dispatch('signOut')
+    router.push('/')
 }
+
+const activeIndex = ref('user')
+const handleSelect = (key, keyPath) => {
+  console.log(key, keyPath)
+
+  if (key === 'signOut') {
+    signOut()
+  } else if (key === 'profile') {
+    router.push('/system/profile')
+  } else if (key === 'lang') {
+  }
+  
+  activeIndex.value = key
+}
+
 </script>
 
 <style>
