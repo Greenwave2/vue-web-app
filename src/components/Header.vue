@@ -7,7 +7,12 @@
     @select="handleSelect"
   >
     <div class="flex-grow" />
-    <el-menu-item index="lang">Languages</el-menu-item>
+    <el-sub-menu index="lang">
+      <template #title>Languages</template>
+      <el-menu-item index="english">English</el-menu-item>
+      <el-menu-item index="chinese">Chinese</el-menu-item>
+      <el-menu-item index="japanese">Japanese</el-menu-item>
+    </el-sub-menu>
     <el-sub-menu index="user">
       <template #title><el-icon><Avatar /></el-icon></template>
       <el-menu-item index="profile">Profile</el-menu-item>
