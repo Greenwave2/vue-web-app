@@ -43,9 +43,22 @@ const routes = [
           {
               path: "/system/dashboard/table",
               component: () => import("../layouts/DashboardTable.vue")
-          }
+          },
         ]
-      }
+      },
+      {
+        path: "/system/setting",
+        component: () => import("../layouts/Setting.vue")
+      },
+      {
+        path: "404",
+        name: "PageNotExist",
+        component: () => import("../views/404.vue")
+      },
+      {
+        path: ":catchAll(.*)", // 不识别的path自动匹配404
+        redirect: '/404',
+      },
     ]
   },
   {
@@ -57,9 +70,14 @@ const routes = [
     component: () => import("../views/Test_axios_comp.vue")
   },
   {
-    path: "*", 
+    path: "/404",
+    name: "PageNotExist",
     component: () => import("../views/404.vue")
-  }
+  },
+  {
+    path: "/:catchAll(.*)", // 不识别的path自动匹配404
+    redirect: '/404',
+  },
 ]
 
 const router = createRouter({
