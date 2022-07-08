@@ -1,7 +1,7 @@
 <template>
-    <el-container>
+    <el-container class="full-height">
         <el-aside width="200px">
-            <AsideBar />
+            <AsideBar class="full-height"/>
         </el-aside>
         <el-container>
             <el-header>
@@ -19,3 +19,9 @@
 import Header from '../components/Header.vue'
 import AsideBar from '../components/AsideBar.vue'
 </script>
+
+<style>
+.full-height {
+    height: 100%;
+}
+</style>
