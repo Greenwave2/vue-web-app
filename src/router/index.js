@@ -33,8 +33,19 @@ const routes = [
         component: () => import("../layouts/Profile.vue")
       },
       {
-        path: "/system/dashboard"
-      },
+        path: "/system/dashboard", 
+        component: () => import("../layouts/Dashboard.vue"),
+        children: [
+          {
+            path: "",
+            redirect: "/system/dashboard/table",
+          },
+          {
+              path: "/system/dashboard/table",
+              component: () => import("../layouts/DashboardTable.vue")
+          }
+        ]
+      }
     ]
   },
   {

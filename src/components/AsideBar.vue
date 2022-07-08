@@ -4,8 +4,8 @@
         background-color="#545c64"
         default-active="2"
         text-color="#fff"
-        @open="handleOpen"
-        @close="handleClose"
+        @open="handleSelect"
+        @close="handleSelect"
     >
         <el-menu-item index="logo">LOGO</el-menu-item>
         <el-menu-item index="dashboard">
@@ -27,13 +27,14 @@
 import {
   DataBoard,
   Menu as IconMenu,
-  Location,
   Setting,
 } from '@element-plus/icons-vue'
-const handleOpen = (key, keyPath) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key, keyPath) => {
-  console.log(key, keyPath)
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const handleSelect = (key, keyPath) => {
+  console.log("/system/" + key)
+
+  router.push("/system/" + key + "/table")
 }
 </script>
