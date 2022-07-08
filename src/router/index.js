@@ -55,6 +55,10 @@ const routes = [
   {
     path: "/test_axios_composition",
     component: () => import("../views/Test_axios_comp.vue")
+  },
+  {
+    path: "*", 
+    component: () => import("../views/404.vue")
   }
 ]
 
@@ -92,4 +96,3 @@ router.beforeEach(async (to, from, next) => {
 });
 
 export default router;
-
