@@ -1,8 +1,8 @@
 <template>
     <el-menu
+        :default-active="activeIndex"
         active-text-color="#ffd04b"
         background-color="#545c64"
-        default-active="2"
         text-color="#fff"
         @open="handleSelect"
         @close="handleSelect"
@@ -29,12 +29,20 @@ import {
   Menu as IconMenu,
   Setting,
 } from '@element-plus/icons-vue'
-import { useRouter } from 'vue-router'
+
+import { ref, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const activeIndex = ref('')
+watch(() => route.path,() => {
+    console.log("路徑變化: ", route.path)
+    activeIndex.value = route.path.split('/')[1]
+})
 
 const router = useRouter()
 const handleSelect = (key, keyPath) => {
   console.log("/system/" + key)
-
-  router.push("/system/" + key + "/table")
+  router.push("/system/" + key)
 }
 </script>
