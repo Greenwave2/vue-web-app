@@ -4,7 +4,8 @@ import {
     signInWithEmailAndPassword,
     signInWithPopup,
     signOut,
-    GoogleAuthProvider
+    GoogleAuthProvider,
+    FacebookAuthProvider
 } from 'firebase/auth'
 
 import { ElMessage } from 'element-plus'
@@ -29,6 +30,9 @@ const mutations = {
 }
 
 const actions ={
+    async setUser ({ commit }, user) {
+        commit('SET_USER', user)
+    }, 
     async signUp ({ commit }, { email, password }) {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password)
@@ -90,8 +94,20 @@ const actions ={
             console.error(error)
         }
     }, 
-    async setUser ({ commit }, user) {
-        commit('SET_USER', user)
+    async signInWithFacebook ({ commit }) {
+        try {
+            const provider = new FacebookAuthProvider()
+            const result = await signInWithPopup(auth, provider)
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            const credential = FacebookAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            // The signed-in user info.
+            const user = result.user;
+            commit('SET_USER', user)
+        }
+        catch (error) {
+            console.error(error)
+        }
     }
 }
 
