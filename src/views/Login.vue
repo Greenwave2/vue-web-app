@@ -31,7 +31,7 @@ const form = reactive({
 const error = ref('')
 
 const signIn = async () => {
-    await store.dispatch('signIn', {
+    await store.dispatch('user/signIn', {
         email: form.email,
         password: form.password
     })
@@ -40,7 +40,7 @@ const signIn = async () => {
 }
 
 const signInWithGoogle = async () => {
-    await store.dispatch('signInWithGoogle')
+    await store.dispatch('user/signInWithGoogle')
 
     router.push('/system')
 }
