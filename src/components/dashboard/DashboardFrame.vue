@@ -5,7 +5,7 @@
         v-model="activeTab"
         tab-position="top"
         style="height: 90%"
-        @tab-remove="store.dispatch('dashboard/addTab', 'KA000001')"
+        @tab-remove="removeTab"
         @tab-click="clickTab"
     >
         <el-tab-pane
@@ -18,7 +18,7 @@
         </el-tab-pane>
         <router-view></router-view>
         <div style="margin-top: 20px">
-            <el-button size="small" @click="store.dispatch('dashboard/addTab', 'KA000001')">
+            <el-button size="small" @click="addTab('KA000001')">
             add tab
             </el-button>
             <el-button size="small" @click="pp">
@@ -40,6 +40,14 @@ const router = useRouter()
 // get all tabs and the activated tab
 const tabs = computed(() => store.getters['dashboard/tabs'])
 const activeTab = ref(route.path.split('/')[3])
+
+const addTab = (name) => {
+    store.dispatch('dashboard/addTab', name)
+}
+
+const removeTab = (name) => {
+    store.dispatch('dashboard/removeTab', name)
+}
 
 // change route when click tab
 const clickTab = (pane, ev) => {
