@@ -80,7 +80,7 @@ router.beforeEach(async (to, from, next) => {
   const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
         const unsubscribe = onAuthStateChanged(auth, user => {
-            store.dispatch("setUser", user)
+            store.dispatch("user/setUser", user)
             unsubscribe();
             resolve(user);
         }, reject);
