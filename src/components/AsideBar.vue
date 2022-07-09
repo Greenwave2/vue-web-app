@@ -1,11 +1,10 @@
 <template>
     <el-menu
+        :default-active="activeIndex"
         active-text-color="#ffd04b"
         background-color="#545c64"
-        default-active="2"
         text-color="#fff"
-        @open="handleOpen"
-        @close="handleClose"
+        @select="handleSelect"
     >
         <el-menu-item index="logo">LOGO</el-menu-item>
         <el-menu-item index="dashboard">
@@ -27,13 +26,27 @@
 import {
   DataBoard,
   Menu as IconMenu,
-  Location,
   Setting,
 } from '@element-plus/icons-vue'
-const handleOpen = (key, keyPath) => {
-  console.log(key, keyPath)
-}
-const handleClose = (key, keyPath) => {
-  console.log(key, keyPath)
+
+import { ref, watch, onBeforeMount } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const activeIndex = ref('')
+
+onBeforeMount(() => {
+    activeIndex.value = route.path.split('/')[2]
+})
+
+watch(() => route.path,() => {
+    // console.log("AsideBar.vue [watch] route change:  ", route.path.split('/')[2])
+    activeIndex.value = route.path.split('/')[2]
+})
+
+const router = useRouter()
+const handleSelect = (key, keyPath) => {
+//   console.log("AsideBar.vue [handleSelect] to: " + "/system/" + key)
+  router.push("/system/" + key)
 }
 </script>

@@ -29,11 +29,34 @@ const routes = [
     },
     children: [
       {
+        path: "",
+        redirect: "/system/dashboard",
+      }, 
+      {
         path: "/system/profile",
-        component: () => import("../layouts/Profile.vue")
+        component: () => import("../components/Profile.vue")
       },
       {
-        path: "/system/dashboard"
+        path: "/system/dashboard", 
+        component: () => import("../components/dashboard/DashboardFrame.vue"),
+        children: [
+          {
+            path: "",
+            redirect: "/system/dashboard/table",
+          },
+          {
+              path: "/system/dashboard/table",
+              component: () => import("../components/dashboard/DashboardTable.vue")
+          },
+        ]
+      },
+      {
+        path: "/system/setting",
+        component: () => import("../components/Setting.vue")
+      },
+      {
+        path: ":catchAll(.*)", // 不認得的 path 自動回到 system 首頁
+        redirect: '/system',
       },
     ]
   },
@@ -81,4 +104,3 @@ router.beforeEach(async (to, from, next) => {
 });
 
 export default router;
-
