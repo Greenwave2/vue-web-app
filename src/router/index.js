@@ -34,11 +34,11 @@ const routes = [
       }, 
       {
         path: "/system/profile",
-        component: () => import("../layouts/Profile.vue")
+        component: () => import("../components/Profile.vue")
       },
       {
         path: "/system/dashboard", 
-        component: () => import("../layouts/Dashboard.vue"),
+        component: () => import("../components/dashboard/DashboardFrame.vue"),
         children: [
           {
             path: "",
@@ -46,13 +46,13 @@ const routes = [
           },
           {
               path: "/system/dashboard/table",
-              component: () => import("../layouts/DashboardTable.vue")
+              component: () => import("../components/dashboard/DashboardTable.vue")
           },
         ]
       },
       {
         path: "/system/setting",
-        component: () => import("../layouts/Setting.vue")
+        component: () => import("../components/Setting.vue")
       },
       {
         path: ":catchAll(.*)", // 不認得的 path 自動回到 system 首頁
@@ -67,16 +67,7 @@ const routes = [
   {
     path: "/test_axios_composition",
     component: () => import("../views/Test_axios_comp.vue")
-  },
-  // {
-  //   path: "/404",
-  //   name: "PageNotExist",
-  //   component: () => import("../views/404.vue")
-  // },
-  // {
-  //   path: "/:catchAll(.*)", // 不识别的path自动匹配404
-  //   redirect: '/404',
-  // },
+  }
 ]
 
 const router = createRouter({

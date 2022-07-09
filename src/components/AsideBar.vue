@@ -40,13 +40,13 @@ onBeforeMount(() => {
 })
 
 watch(() => route.path,() => {
-    console.log("路徑變化: ", route.path.split('/')[2])
+    // console.log("AsideBar.vue [watch] route change:  ", route.path.split('/')[2])
     activeIndex.value = route.path.split('/')[2]
 })
 
 const router = useRouter()
 const handleSelect = (key, keyPath) => {
-  console.log("/system/" + key)
+//   console.log("AsideBar.vue [handleSelect] to: " + "/system/" + key)
   router.push("/system/" + key)
 }
 </script>
