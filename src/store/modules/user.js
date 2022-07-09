@@ -14,7 +14,7 @@ const state = {
 }
 
 const getters = {
-    getUser: (state) => {
+    user: (state) => {
         return state.user
     }
 }

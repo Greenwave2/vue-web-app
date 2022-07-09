@@ -48,6 +48,11 @@ const routes = [
               path: "/system/dashboard/table",
               component: () => import("../components/dashboard/DashboardTable.vue")
           },
+          {
+              path: "/system/dashboard/:gateway_id", 
+              component: () => import("../components/dashboard/Dashboard.vue")
+          },
+          
         ]
       },
       {
