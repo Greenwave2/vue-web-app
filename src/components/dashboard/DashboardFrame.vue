@@ -1,81 +1,62 @@
 <template>
     <el-tabs
-        v-model="editableTabsValue"
+        class="dashboard-tabs"
+        type="card"
+        v-model="activeTab"
         tab-position="top"
         style="height: 90%"
-        @tab-remove="removeTab"
+        @tab-remove="store.dispatch('dashboard/addTab', 'KA000001')"
         @tab-click="clickTab"
     >
         <el-tab-pane
-            v-for="item in editableTabs"
-            :key="item.path"
+            v-for="item in tabs"
+            :key="item.name"
             :label="item.title"
-            :name="item.path"
+            :name="item.name"
             :closable="item.closable"
         >
         </el-tab-pane>
         <router-view></router-view>
         <div style="margin-top: 20px">
-            <el-button size="small" @click="addTab(editableTabsValue)">
+            <el-button size="small" @click="store.dispatch('dashboard/addTab', 'KA000001')">
             add tab
+            </el-button>
+            <el-button size="small" @click="pp">
+                test
             </el-button>
         </div>
     </el-tabs>
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
-let tabIndex = 2
-const editableTabsValue = ref('2')
-const editableTabs = ref([
-    {
-        title: 'Table',
-        path: 'table', 
-        closable: false,
-    },
-    {
-        title: 'KA000001',
-        path: 'KA000001',
-        closable: true
-    }, 
-])
-
-const addTab = (targetName) => {
-  const newTabName = `${++tabIndex}`
-  editableTabs.value.push({
-    title: 'New Tab',
-    name: newTabName,
-    content: 'New Tab content',
-    closable: true
-  })
-  editableTabsValue.value = newTabName
-}
-
-const removeTab = (targetName) => {
-    console.log(targetName)
-    const tabs = editableTabs.value
-    let activeName = editableTabsValue.value
-    if (activeName === targetName) {
-        tabs.forEach((tab, index) => {
-        if (tab.name === targetName) {
-            const nextTab = tabs[index + 1] || tabs[index - 1]
-            if (nextTab) {
-            activeName = nextTab.name
-            }
-        }
-        })
-    }
-
-    editableTabsValue.value = activeName
-    editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
-}
-
+const store = useStore()
+const route = useRoute()
 const router = useRouter()
+
+// get all tabs and the activated tab
+const tabs = computed(() => store.getters['dashboard/tabs'])
+const activeTab = ref(route.path.split('/')[3])
+
+// change route when click tab
 const clickTab = (pane, ev) => {
     console.log(pane.props.name)
     const dashboardPath = '/system/dashboard/' + pane.props.name
     router.push(dashboardPath)
 }
+
+// use to test variable in vuex
+const pp = () => {
+    console.log(tabs)
+}
 </script>
+
+<style>
+/* 讓 Table 不要黏在 tabs 下面 */
+.dashboard-tabs > .el-tabs__content {
+  padding: 16px;
+}
+</style>
