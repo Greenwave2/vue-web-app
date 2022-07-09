@@ -10,5 +10,5 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 
 const store = useStore()
-const user = computed(() => store.getters.getUser)
+const user = computed(() => store.getters['user/user'])
 </script>

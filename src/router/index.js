@@ -48,6 +48,11 @@ const routes = [
               path: "/system/dashboard/table",
               component: () => import("../components/dashboard/DashboardTable.vue")
           },
+          {
+              path: "/system/dashboard/:gateway_id", 
+              component: () => import("../components/dashboard/Dashboard.vue")
+          },
+          
         ]
       },
       {
@@ -80,7 +85,7 @@ router.beforeEach(async (to, from, next) => {
   const getCurrentUser = () => {
     return new Promise((resolve, reject) => {
         const unsubscribe = onAuthStateChanged(auth, user => {
-            store.dispatch("setUser", user)
+            store.dispatch("user/setUser", user)
             unsubscribe();
             resolve(user);
         }, reject);
