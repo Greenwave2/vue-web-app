@@ -1,5 +1,6 @@
 <template>
     {{ route.params.gateway_id }}
+    
 </template>
 
 <script setup>
