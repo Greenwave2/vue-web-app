@@ -1,3 +1,5 @@
+import { useRoute } from 'vue-router'
+
 const state = {
     tabs: [
         {
@@ -5,17 +7,17 @@ const state = {
             name: 'table',
             closable: false,
         }, 
-        {
-            title: 'KA00001',
-            name: 'KA00001',
-            closable: true,
-        }
     ], 
+    activeTab: 'table',
 }
 
 const getters = {
     tabs: (state) => {
         return state.tabs
+    }, 
+    activeTab: (state) => {
+        const route = useRoute()
+        return route.path.split('/')[3]
     }
 }
 

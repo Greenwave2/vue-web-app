@@ -2,10 +2,10 @@
     <el-tabs
         class="dashboard-tabs"
         type="card"
-        v-model="activeTab"
+        :model-value="activeTab"
         tab-position="top"
         style="height: 90%"
-        @tab-remove="store.dispatch('dashboard/addTab', 'KA000001')"
+        @tab-remove="removeTab"
         @tab-click="clickTab"
     >
         <el-tab-pane
@@ -18,9 +18,6 @@
         </el-tab-pane>
         <router-view></router-view>
         <div style="margin-top: 20px">
-            <el-button size="small" @click="store.dispatch('dashboard/addTab', 'KA000001')">
-            add tab
-            </el-button>
             <el-button size="small" @click="pp">
                 test
             </el-button>
@@ -29,17 +26,25 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, computed, watch, onBeforeMount } from 'vue'
+import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 const store = useStore()
-const route = useRoute()
 const router = useRouter()
 
 // get all tabs and the activated tab
 const tabs = computed(() => store.getters['dashboard/tabs'])
-const activeTab = ref(route.path.split('/')[3])
+const activeTab = computed(() => store.getters['dashboard/activeTab'])
+
+const addTab = (name) => {
+    store.dispatch('dashboard/addTab', name)
+}
+
+const removeTab = (name) => {
+    store.dispatch('dashboard/removeTab', name)
+    router.push('/system/dashboard')
+}
 
 // change route when click tab
 const clickTab = (pane, ev) => {
@@ -47,6 +52,13 @@ const clickTab = (pane, ev) => {
     const dashboardPath = '/system/dashboard/' + pane.props.name
     router.push(dashboardPath)
 }
+
+onBeforeMount(() => {
+    // add active tab if it is not in tabs
+    if(!tabs.value.find(tab => tab.name === activeTab.value)) {
+        store.dispatch('dashboard/addTab', activeTab.value)
+    }
+})
 
 // use to test variable in vuex
 const pp = () => {

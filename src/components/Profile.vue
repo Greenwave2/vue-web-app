@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import axios from 'axios';
+import axios from 'axios'
 import { ref, reactive, computed, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 

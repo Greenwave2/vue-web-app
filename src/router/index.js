@@ -38,7 +38,7 @@ const routes = [
       },
       {
         path: "/system/dashboard", 
-        component: () => import("../components/dashboard/DashboardFrame.vue"),
+        component: () => import("../views/dashboard/DashboardFrame.vue"),
         children: [
           {
             path: "",
@@ -46,13 +46,12 @@ const routes = [
           },
           {
               path: "/system/dashboard/table",
-              component: () => import("../components/dashboard/DashboardTable.vue")
+              component: () => import("../views/dashboard/DashboardTable.vue")
           },
           {
               path: "/system/dashboard/:gateway_id", 
-              component: () => import("../components/dashboard/Dashboard.vue")
-          },
-          
+              component: () => import("../views/dashboard/DashboardDetail.vue")
+          }, 
         ]
       },
       {
