@@ -7,9 +7,12 @@
         <el-input v-model="search" size="small" placeholder="Type to search" />
       </template>
       <template #default="scope">
-        <el-button size="small" @click="handleEdit(scope.$index, scope.row)"
-          >Edit</el-button
-        >
+        <el-button size="small" @click="handleDetail(scope.row.id)">
+          Detail
+        </el-button>
+        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">
+          Edit
+        </el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -17,15 +20,31 @@
 
 <script setup>
 import { computed, ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { useStore } from 'vuex'
+
+const router = useRouter()
+const store = useStore()
 
 const search = ref('')
 const filterTableData = computed(() =>
   tableData.filter(
     (data) =>
       !search.value ||
-      data.name.toLowerCase().includes(search.value.toLowerCase())
+      data.id.toLowerCase().includes(search.value.toLowerCase())
   )
 )
+
+const handleDetail = (id) => {
+  // if id in current tabs then add it to tabs
+  const currentTabs = store.getters['dashboard/tabs']
+  if(!currentTabs.find(tab => tab.name === id)) {
+    store.dispatch('dashboard/addTab', id)
+  }
+
+  router.push({ path: `/system/dashboard/${id}`})
+}
+
 const handleEdit = (index, row) => {
   console.log(index, row)
 }

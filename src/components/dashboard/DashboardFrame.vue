@@ -2,7 +2,7 @@
     <el-tabs
         class="dashboard-tabs"
         type="card"
-        v-model="activeTab"
+        :model-value="activeTab"
         tab-position="top"
         style="height: 90%"
         @tab-remove="removeTab"
@@ -29,17 +29,16 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { ref, computed, watch, onBeforeMount } from 'vue'
+import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
 const store = useStore()
-const route = useRoute()
 const router = useRouter()
 
 // get all tabs and the activated tab
 const tabs = computed(() => store.getters['dashboard/tabs'])
-const activeTab = ref(route.path.split('/')[3])
+const activeTab = computed(() => store.getters['dashboard/activeTab'])
 
 const addTab = (name) => {
     store.dispatch('dashboard/addTab', name)
