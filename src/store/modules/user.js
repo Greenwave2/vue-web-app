@@ -11,12 +11,16 @@ import {
 import { ElMessage } from 'element-plus'
 
 const state = {
-    user: null
+    user: null, 
+    idToken: null,
 }
 
 const getters = {
     user: (state) => {
         return state.user
+    }, 
+    idToken: (state) => {
+        return state.idToken
     }
 }
 
@@ -26,12 +30,15 @@ const mutations = {
     }, 
     CLEAR_USER (state) {
         state.user = null
+    }, 
+    SET_ID_TOKEN (state, idToken) {
+        state.idToken = idToken
     }
 }
 
 const actions ={
-    async setUser ({ commit }, user) {
-        commit('SET_USER', user)
+    setIdToken({ commit }, idToken){
+        commit('SET_ID_TOKEN', idToken)
     }, 
     async signUp ({ commit }, { email, password }) {
         try {

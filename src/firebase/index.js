@@ -1,5 +1,9 @@
 import { initializeApp } from 'firebase/app'
-import { getAuth } from 'firebase/auth'
+import { 
+    getAuth, 
+    getIdToken,
+    onAuthStateChanged
+} from 'firebase/auth'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyCvwHfqX0FHhsz9uqauU54SObeH8dyqk94',
@@ -13,5 +17,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig)
 const auth = getAuth(app)
 
-export { auth }
+const getIdTokenPromise = () => {
+    return new Promise((resolve, reject) => {
+      const unsubscribe = onAuthStateChanged(auth, (user) => {
+        unsubscribe();
+        if (user) {
+          getIdToken(user).then((idToken) => {
+            resolve(idToken);
+          }, (error) => {
+            resolve(null);
+          });
+        } else {
+          resolve(null);
+        }
+      })
+    })
+  }
+
+export { auth, getIdTokenPromise }
 
