@@ -18,9 +18,6 @@
         </el-tab-pane>
         <router-view></router-view>
         <div style="margin-top: 20px">
-            <el-button size="small" @click="addTab('KA000001')">
-            add tab
-            </el-button>
             <el-button size="small" @click="pp">
                 test
             </el-button>
@@ -46,6 +43,7 @@ const addTab = (name) => {
 
 const removeTab = (name) => {
     store.dispatch('dashboard/removeTab', name)
+    router.push('/system/dashboard')
 }
 
 // change route when click tab
@@ -54,6 +52,13 @@ const clickTab = (pane, ev) => {
     const dashboardPath = '/system/dashboard/' + pane.props.name
     router.push(dashboardPath)
 }
+
+onBeforeMount(() => {
+    // add active tab if it is not in tabs
+    if(!tabs.value.find(tab => tab.name === activeTab.value)) {
+        store.dispatch('dashboard/addTab', activeTab.value)
+    }
+})
 
 // use to test variable in vuex
 const pp = () => {
