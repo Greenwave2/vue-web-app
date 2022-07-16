@@ -55,6 +55,10 @@ const routes = [
         ]
       },
       {
+        path: "/system/device-manager",
+        component: () => import("../views/device-manager/DeviceTable.vue")
+      },
+      {
         path: "/system/setting",
         component: () => import("../components/Setting.vue")
       },
