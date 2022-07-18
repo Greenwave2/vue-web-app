@@ -34,12 +34,14 @@ jobs:
       run: ls -la
     - name: Change dist to kaso-agri
       run: mv ./dist ./kaso-agri
-    
-    - name: Copy single file to remote
-      uses: garygrossgarten/github-action-scp@release
+        
+    - uses: actions/checkout@master
+    - name: copy file via ssh password
+      uses: appleboy/scp-action@master
       with:
-        local: ./kaso-agri
-        remote: ~/xindian_test/webui/kaso-agri
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
         password: ${{ secrets.SSH_PASSWORD }}
+        port: 22
+        source: "./kaso-agri"
+        target: "~/xindian_test/webui/kaso-agri"
