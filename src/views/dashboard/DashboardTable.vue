@@ -63,13 +63,14 @@ const filterTableData = computed(() =>
 )
 
 const handleDetail = (id) => {
+  const name = 'dashboard/' + id
   // if id in current tabs then add it to tabs
-  const currentTabs = store.getters['dashboard/tabs']
-  if(!currentTabs.find(tab => tab.name === id)) {
-    store.dispatch('dashboard/addTab', id)
+  const currentTabs = store.getters['routerTab/tabs']
+  if(!currentTabs.find(tab => tab.name === name)) {
+    store.dispatch('routerTab/addTab', name)
   }
 
-  router.push({ path: `/system/dashboard/${id}`})
+  router.push({ path: `/system/${name}`})
 }
 
 const handleEdit = (index, row) => {
