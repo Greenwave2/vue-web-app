@@ -8,6 +8,7 @@
                 <Header />
             </el-header>
             <el-main>
+                <RouterTabs />
                 <router-view />
             </el-main>
         </el-container>
@@ -18,6 +19,7 @@
 // components
 import Header from '../components/Header.vue'
 import AsideBar from '../components/AsideBar.vue'
+import RouterTabs from '../components/RouterTabs.vue'
 </script>
 
 <style>

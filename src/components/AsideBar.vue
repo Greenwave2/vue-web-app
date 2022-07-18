@@ -1,9 +1,9 @@
 <template>
     <el-menu
         :default-active="activeIndex"
-        active-text-color="#ffd04b"
-        background-color="#545c64"
-        text-color="#fff"
+        active-text-color="#409eff"
+        background-color="#304156"
+        text-color="#bfcbd9"
         @select="handleSelect"
     >
         <el-menu-item index="logo">LOGO</el-menu-item>
