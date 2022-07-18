@@ -4,6 +4,9 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: process.env.NODE_ENV === 'production'
+  ? '/kaso-agri/'
+  : '/',
   define: {
     // i18n warning 處理
     __VUE_I18N_FULL_INSTALL__: true,
