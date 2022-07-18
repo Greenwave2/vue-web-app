@@ -44,4 +44,4 @@ jobs:
         password: ${{ secrets.SSH_PASSWORD }}
         port: 22
         source: "./kaso-agri"
-        target: "~/xindian_test/webui/kaso-agri"
+        target: "~/xindian_test/webui"
