@@ -56,7 +56,21 @@ const routes = [
       },
       {
         path: "/system/device-manager",
-        component: () => import("../views/device-manager/DeviceTable.vue")
+        component: () => import("../views/device-manager/DeviceFrame.vue"),
+        children: [
+          {
+            path: "",
+            redirect: "/system/device-manager/table",
+          }, 
+          {
+            path: "/system/device-manager/table",
+            component: () => import("../views/device-manager/DeviceTable.vue")
+          }, 
+          {
+            path: "/system/device-manager/:gateway_id", 
+            component: () => import("../views/device-manager/DeviceDetail.vue")
+          },
+        ]
       },
       {
         path: "/system/setting",
