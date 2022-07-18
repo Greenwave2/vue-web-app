@@ -32,7 +32,7 @@ const store = useStore()
 const router = useRouter()
 
 const signOut = () => {
-    store.dispatch('signOut')
+    store.dispatch('user/signOut')
     router.push('/')
 }
 

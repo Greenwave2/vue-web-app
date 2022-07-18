@@ -11,7 +11,7 @@
     <el-alert v-if="error" type="error" show-icon> {{error.message}} </el-alert>
     <span>Need an account? Click here to <el-link type="primary" @click="router.push('/sign-up')">Sign UP</el-link></span><br>
     <el-button @click="signInWithGoogle"> Google </el-button>
-    <el-button @click="signInWithGoogle"> Facebook </el-button>
+    <el-button @click="signInWithFacebook"> Facebook </el-button>
     <el-button @click="signInWithGoogle"> Apple </el-button>
     </el-card>
 </template>
@@ -31,7 +31,7 @@ const form = reactive({
 const error = ref('')
 
 const signIn = async () => {
-    await store.dispatch('signIn', {
+    await store.dispatch('user/signIn', {
         email: form.email,
         password: form.password
     })
@@ -40,7 +40,13 @@ const signIn = async () => {
 }
 
 const signInWithGoogle = async () => {
-    await store.dispatch('signInWithGoogle')
+    await store.dispatch('user/signInWithGoogle')
+
+    router.push('/system')
+}
+
+const signInWithFacebook = async () => {
+    await store.dispatch('user/signInWithFacebook')
 
     router.push('/system')
 }

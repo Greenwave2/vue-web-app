@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router"
-import store from '../store'
-import { getAuth, onAuthStateChanged } from "firebase/auth"
+import { getIdTokenPromise } from "../firebase"
+import store from "../store";
 
 const routes = [
   {
@@ -29,11 +29,56 @@ const routes = [
     },
     children: [
       {
+        path: "",
+        redirect: "/system/dashboard",
+      }, 
+      {
         path: "/system/profile",
-        component: () => import("../layouts/Profile.vue")
+        component: () => import("../components/Profile.vue")
       },
       {
-        path: "/system/dashboard"
+        path: "/system/dashboard", 
+        component: () => import("../views/dashboard/DashboardFrame.vue"),
+        children: [
+          {
+            path: "",
+            redirect: "/system/dashboard/table",
+          },
+          {
+              path: "/system/dashboard/table",
+              component: () => import("../views/dashboard/DashboardTable.vue")
+          },
+          {
+              path: "/system/dashboard/:gateway_id", 
+              component: () => import("../views/dashboard/DashboardDetail.vue")
+          }, 
+        ]
+      },
+      {
+        path: "/system/device-manager",
+        component: () => import("../views/device-manager/DeviceFrame.vue"),
+        children: [
+          {
+            path: "",
+            redirect: "/system/device-manager/table",
+          }, 
+          {
+            path: "/system/device-manager/table",
+            component: () => import("../views/device-manager/DeviceTable.vue")
+          }, 
+          {
+            path: "/system/device-manager/:gateway_id", 
+            component: () => import("../views/device-manager/DeviceDetail.vue")
+          },
+        ]
+      },
+      {
+        path: "/system/setting",
+        component: () => import("../components/Setting.vue")
+      },
+      {
+        path: ":catchAll(.*)", // 不認得的 path 自動回到 system 首頁
+        redirect: '/system',
       },
     ]
   },
@@ -53,25 +98,17 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const auth = getAuth()
-  const getCurrentUser = () => {
-    return new Promise((resolve, reject) => {
-        const unsubscribe = onAuthStateChanged(auth, user => {
-            store.dispatch("setUser", user)
-            unsubscribe();
-            resolve(user);
-        }, reject);
-    })
-  }
-  const user = await getCurrentUser()
+  const idToken = await getIdTokenPromise()
+
+  store.dispatch('user/setIdToken', idToken)
 
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
   const requiresGuest = to.matched.some(record => record.meta.requiresGuest)
 
-  if (requiresAuth && user == null) { // 判斷該路徑是否需要登入
+  if (requiresAuth && idToken == null) { // 判斷該路徑是否需要登入
     console.log("[beforeEach] already logged out")
     next("/")
-  } else if(requiresGuest && user != null ) { // 判斷該路徑是否需要登出
+  } else if(requiresGuest && idToken != null ) { // 判斷該路徑是否需要登出
     console.log("[beforeEach] already logged in")
     next("/system")
   } else {
@@ -81,4 +118,3 @@ router.beforeEach(async (to, from, next) => {
 });
 
 export default router;
-
