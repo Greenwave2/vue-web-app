@@ -14,7 +14,7 @@ const getGatewayConfig = async (idToken, gatewayId) => {
         })
 
         console.log(gatewayId)
-        console.log(response.data)
+        console.log("[getGatewayConfig]: ", response.data)
 
         return response.data.gatewayInfo
     } catch (error) {
@@ -31,7 +31,7 @@ const getGatewayList = async (idToken) => {
             }
         })
 
-        console.log(JSON.stringify(response.data))
+        console.log("[getGatewayList]:", response.data)
 
         return response.data
     } catch (error) {
