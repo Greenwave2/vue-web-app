@@ -8,15 +8,15 @@ const getGatewayConfig = async (idToken, gatewayId) => {
             headers: {
                 'Authorization': 'Bearer ' + idToken
             }, 
-            req: {
-                gatewayId: gatewayId
+            params: {
+                gateway_id: gatewayId
             }
         })
 
         console.log(gatewayId)
         console.log(response.data)
 
-        return response.data.gatewayInfo
+        return response.data
     } catch (error) {
         console.log(error)
     }
@@ -31,7 +31,24 @@ const getGatewayList = async (idToken) => {
             }
         })
 
-        console.log(JSON.stringify(response.data))
+        console.log(response.data)
+
+        return response.data
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const getDashboardConfig = async (idToken) => {
+    try {
+        const url = 'http://13.66.157.148:8080/api_test/getDashboardConfig'
+        const response = await axios.get(url, {
+            headers: {
+                'Authorization': 'Bearer ' + idToken
+            }
+        })
+
+        console.log(response.data)
 
         return response.data
     } catch (error) {

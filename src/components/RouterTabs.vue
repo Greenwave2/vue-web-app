@@ -3,7 +3,7 @@
     v-for="tab in tabs"
     :key="tab.name"
     class="mx-1"
-    closable
+    :closable="tab.name === 'dashboard/table' || tab.name === 'device-manager/table' ? false : true"
     :disable-transitions="false"
     @close="removeTab(tab.name)"
     :effect="activeTab === tab.name ? 'dark' : 'light'"
