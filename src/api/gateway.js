@@ -8,15 +8,15 @@ const getGatewayConfig = async (idToken, gatewayId) => {
             headers: {
                 'Authorization': 'Bearer ' + idToken
             }, 
-            req: {
-                gatewayId: gatewayId
+            params: {
+                gateway_id: gatewayId
             }
         })
 
         console.log(gatewayId)
         console.log("[getGatewayConfig]: ", response.data)
 
-        return response.data.gatewayInfo
+        return response.data
     } catch (error) {
         console.log(error)
     }
