@@ -34,5 +34,5 @@ const getIdTokenPromise = () => {
     })
   }
 
-export { auth, getIdTokenPromise }
+export { app, auth, getIdTokenPromise }
 

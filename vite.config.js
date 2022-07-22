@@ -2,11 +2,12 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
-// https://vitejs.dev/config/
+// element-plus auto import
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+
 export default defineConfig({
-  // base: process.env.NODE_ENV === 'production'
-  // ? '/kaso-agri/'
-  // : '/',
   define: {
     // i18n warning 處理
     __VUE_I18N_FULL_INSTALL__: true,
@@ -18,5 +19,13 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   }, 
-  plugins: [vue()]
+  plugins: [
+    vue(), 
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+  ]
 })
