@@ -3,11 +3,6 @@ import { createApp } from 'vue'
 import App from './App.vue'
 const app = createApp(App)
 
-// element-plus
-import ElementPlus from 'element-plus'
-import 'element-plus/dist/index.css'
-app.use(ElementPlus)
-
 // vue-router
 import router from './router'
 app.use(router)
@@ -25,11 +20,6 @@ import axios from 'axios'
 //app.config.globalProperties.$axios=axios
 //app.use(axios)
 app.provide('$axios', axios);
-
-// Initialize Firebase
-import { initializeApp } from 'firebase/app'
-import firebaseConfig from './config/firebaseConfig.js'
-initializeApp(firebaseConfig)
 
 
 app.mount('#app')
