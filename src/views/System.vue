@@ -1,4 +1,5 @@
 <template>
+<fullscreen class="full-height">
     <el-container class="full-height">
         <el-aside width="200px">
             <AsideBar class="full-height"/>
@@ -13,6 +14,7 @@
             </el-main>
         </el-container>
     </el-container>
+</fullscreen>
 </template>
 
 <script setup>

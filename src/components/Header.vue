@@ -7,6 +7,9 @@
     @select="handleSelect"
   >
     <div class="flex-grow" />
+    <el-button size="large" text style="margin:auto" v-fullscreen>
+      <el-icon><FullScreen /></el-icon>
+    </el-button>
     <el-sub-menu index="lang">
       <template #title>Languages</template>
       <el-menu-item index="english">English</el-menu-item>
@@ -22,7 +25,7 @@
 </template>
 
 <script setup>
-import { Avatar } from '@element-plus/icons-vue'
+import { FullScreen, Avatar } from '@element-plus/icons-vue'
 
 import { ref } from 'vue'
 import { useStore } from 'vuex'
