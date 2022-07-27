@@ -1,6 +1,6 @@
 <template>
   <el-table :data="filterTableData" style="width: 100%" >
-    <el-table-column label="Location" prop="location" />
+    <el-table-column label="Location" prop="location.address" />
     <el-table-column label="Gateway" prop="gateway_id" />
     <el-table-column label="Status">
       <el-switch
@@ -16,10 +16,10 @@
     <el-table-column label="Interfaces">
       <template #default="scope">
         <el-tag 
-        v-for="tag in scope.row.interfaces"
-        :key="tag"
+        v-for="(tag, index) in scope.row.interfaces"
+        :key="index"
         >
-          {{ tag.interface.type }}
+          {{ tag.interface_id }}
         </el-tag>
       </template>
     </el-table-column>
