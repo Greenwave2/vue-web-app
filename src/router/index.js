@@ -22,6 +22,13 @@ const routes = [
     }
   },
   {
+    path: "/forgot-password",
+    component: () => import("../views/ForgotPassword.vue"), 
+    meta: {
+      requiresGuest: true,
+    }
+  }, 
+  {
     path: "/system",
     component: () => import("../views/System.vue"),
     meta: {
