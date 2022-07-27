@@ -5,32 +5,32 @@ import store from "../store";
 const routes = [
   {
     path: "/",
-    component: () => import("../views/Home.vue"),
+    component: () => import("@/views/Home.vue"),
   },
   {
     path: "/sign-in",
-    component: () => import("../views/Login.vue"),
+    component: () => import("@/views/SignIn.vue"),
     meta: {
       requiresGuest: true,
     }
   },
   {
-    path: "/register",
-    component: () => import("../views/Register.vue"),
+    path: "/sign-up",
+    component: () => import("@/views/SignUp.vue"),
     meta: {
       requiresGuest: true,
     }
   },
   {
-    path: "/forgot-password",
-    component: () => import("../views/ForgotPassword.vue"), 
+    path: "/forget-password",
+    component: () => import("@/views/ForgetPassword.vue"), 
     meta: {
       requiresGuest: true,
     }
   }, 
   {
     path: "/system",
-    component: () => import("../views/System.vue"),
+    component: () => import("@/views/System.vue"),
     meta: {
       requiresAuth: true,
     },
@@ -41,11 +41,11 @@ const routes = [
       }, 
       {
         path: "/system/profile",
-        component: () => import("../components/Profile.vue")
+        component: () => import("@/components/Profile.vue")
       },
       {
         path: "/system/dashboard", 
-        component: () => import("../views/dashboard/DashboardFrame.vue"),
+        component: () => import("@/views/dashboard/DashboardFrame.vue"),
         children: [
           {
             path: "",
@@ -53,17 +53,17 @@ const routes = [
           },
           {
               path: "/system/dashboard/table",
-              component: () => import("../views/dashboard/DashboardTable.vue")
+              component: () => import("@/views/dashboard/DashboardTable.vue")
           },
           {
               path: "/system/dashboard/:gateway_id", 
-              component: () => import("../views/dashboard/DashboardDetail.vue")
+              component: () => import("@/views/dashboard/DashboardDetail.vue")
           }, 
         ]
       },
       {
         path: "/system/device-manager",
-        component: () => import("../views/device-manager/DeviceFrame.vue"),
+        component: () => import("@/views/device-manager/DeviceFrame.vue"),
         children: [
           {
             path: "",
@@ -71,17 +71,17 @@ const routes = [
           }, 
           {
             path: "/system/device-manager/table",
-            component: () => import("../views/device-manager/DeviceTable.vue")
+            component: () => import("@/views/device-manager/DeviceTable.vue")
           }, 
           {
             path: "/system/device-manager/:gateway_id", 
-            component: () => import("../views/device-manager/DeviceDetail.vue")
+            component: () => import("@/views/device-manager/DeviceDetail.vue")
           },
         ]
       },
       {
         path: "/system/setting",
-        component: () => import("../components/Setting.vue")
+        component: () => import("@/components/Setting.vue")
       },
       {
         path: ":catchAll(.*)", // 不認得的 path 自動回到 system 首頁
@@ -91,11 +91,11 @@ const routes = [
   },
   {
     path: "/test_axios_option",
-    component: () => import("../views/Test_axios_option.vue")
+    component: () => import("@/views/Test_axios_option.vue")
   },
   {
     path: "/test_axios_composition",
-    component: () => import("../views/Test_axios_comp.vue")
+    component: () => import("@/views/Test_axios_comp.vue")
   }
 ]
 
