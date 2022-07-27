@@ -3,6 +3,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 const app = createApp(App)
 
+// vue fullscreen
+import VueFullscreen from 'vue-fullscreen'
+app.use(VueFullscreen)
+
 // vue-router
 import router from './router'
 app.use(router)

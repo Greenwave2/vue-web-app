@@ -5,7 +5,8 @@ import {
     signInWithPopup,
     signOut,
     GoogleAuthProvider,
-    FacebookAuthProvider
+    FacebookAuthProvider, 
+    sendPasswordResetEmail,
 } from 'firebase/auth'
 
 import { ElMessage } from 'element-plus'
@@ -114,6 +115,20 @@ const actions ={
         }
         catch (error) {
             console.error(error)
+        }
+    }, 
+    async sendPasswordResetEmail ({ commit }, email) {
+        try {
+            await sendPasswordResetEmail(auth, email)
+            ElMessage.success('Password reset email sent')
+        }
+        catch (error) {
+            switch (error.code) {
+                case 'auth/user-not-found':
+                    ElMessage.error('User not found')
+                default:
+                    throw console.error(error.message)
+            }
         }
     }
 }
