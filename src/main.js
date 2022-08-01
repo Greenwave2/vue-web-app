@@ -25,5 +25,4 @@ import axios from 'axios'
 //app.use(axios)
 app.provide('$axios', axios);
 
-
 app.mount('#app')
