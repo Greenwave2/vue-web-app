@@ -23,6 +23,6 @@ app.use(i18n)
 import axios from 'axios'
 //app.config.globalProperties.$axios=axios
 //app.use(axios)
-app.provide('$axios', axios);
+app.provide('$axios', axios)
 
 app.mount('#app')

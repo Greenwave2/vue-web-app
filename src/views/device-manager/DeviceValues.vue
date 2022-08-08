@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>{{ route.params.gateway_id }}</h1>
-    <h2>{{ DashboardConfig }}</h2>
     <div
       class="view"
       v-for="(inter, index) in !DashboardConfig

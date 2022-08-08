@@ -2,8 +2,7 @@
   <router-view></router-view>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style>
 #app {
@@ -14,7 +13,9 @@
   color: #2c3e50;
 }
 
-html,body,#app{
+html,
+body,
+#app {
   height: 100%;
   margin: 0;
   background-color: var(--el-bg-color);

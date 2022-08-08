@@ -5,12 +5,12 @@ import gateway from './modules/gateway'
 import routerTab from './modules/routerTab'
 
 const store = createStore({
-    modules: {
-        user: user,
-        dashboard: dashboard, 
-        gateway: gateway,
-        routerTab: routerTab,
-    }
+  modules: {
+    user: user,
+    dashboard: dashboard,
+    gateway: gateway,
+    routerTab: routerTab,
+  },
 })
 
 export default store
