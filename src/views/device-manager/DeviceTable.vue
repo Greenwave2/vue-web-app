@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="filterTableData" style="width: 100%" >
+  <el-table :data="filterTableData" style="width: 100%">
     <el-table-column label="Location" prop="location.address" />
     <el-table-column label="Gateway" prop="gateway_id" />
     <el-table-column label="Status">
@@ -15,10 +15,7 @@
     </el-table-column>
     <el-table-column label="Interfaces">
       <template #default="scope">
-        <el-tag 
-        v-for="(tag, index) in scope.row.interfaces"
-        :key="index"
-        >
+        <el-tag v-for="(tag, index) in scope.row.interfaces" :key="index">
           {{ tag.interface_id }}
         </el-tag>
       </template>
@@ -31,7 +28,7 @@
         <el-button size="small" @click="handleDetail(scope.row.gateway_id)">
           Detail
         </el-button>
-        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">
+        <el-button size="small" @click="handleEdit(scope.row.gateway_id)">
           Edit
         </el-button>
       </template>
@@ -57,26 +54,34 @@ const tableData = ref([])
 
 const filterTableData = computed(() =>
   tableData.value.filter(
-    (data) =>
+    data =>
       !search.value ||
       data.gateway_id.toLowerCase().includes(search.value.toLowerCase())
   )
 )
 
-const handleDetail = (id) => {
-    const name = 'device-manager/' + id
+const handleDetail = id => {
+  const name = 'device-manager/' + id + '/values'
 
-    // if id in current tabs then add it to tabs
-    const currentTabs = store.getters['routerTab/tabs']
-    if(!currentTabs.find(tab => tab.name === name)) {
-        store.dispatch('routerTab/addTab', name)
-    }
+  // if id in current tabs then add it to tabs
+  const currentTabs = store.getters['routerTab/tabs']
+  if (!currentTabs.find(tab => tab.name === name)) {
+    store.dispatch('routerTab/addTab', name)
+  }
 
-    router.push({ path: `/system/${name}`})
+  router.push({ path: `/system/${name}` })
 }
 
-const handleEdit = (index, row) => {
-  console.log(index, row)
+const handleEdit = id => {
+  const name = 'device-manager/' + id + '/config'
+
+  // if id in current tabs then add it to tabs
+  const currentTabs = store.getters['routerTab/tabs']
+  if (!currentTabs.find(tab => tab.name === name)) {
+    store.dispatch('routerTab/addTab', name)
+  }
+
+  router.push({ path: `/system/${name}` })
 }
 
 onBeforeMount(() => {

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
 
-import eslintPlugin from 'vite-plugin-eslint'
+// import eslintPlugin from 'vite-plugin-eslint'
 
 // element-plus auto import
 import AutoImport from 'unplugin-auto-import/vite'
@@ -43,24 +43,24 @@ export default defineConfig({
       // buffer: 'rollup-plugin-node-polyfills/polyfills/buffer-es6',
       // process: 'rollup-plugin-node-polyfills/polyfills/process-es6',
     },
-  }, 
+  },
   plugins: [
-    vue(), 
-    eslintPlugin({
-      include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue']
-    }), 
+    vue(),
+    // eslintPlugin({
+    //   include: ['src/**/*.js', 'src/**/*.vue', 'src/*.js', 'src/*.vue'],
+    // }),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-  ], 
+  ],
   build: {
     // rollupOptions: {
     //   plugins: [
     //     rollupNodePolyFill(),
     //   ],
     // },
-  }
+  },
 })
